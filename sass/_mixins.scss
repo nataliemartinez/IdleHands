@@ -1,0 +1,86 @@
+/*--------------------------------*\
+	 ESSENTIALS
+\*--------------------------------*/
+
+/* 
+ * Mixin to prefix a property
+ *
+ * @author Hugo Giraudel
+ * @param {String} $property - Property name
+ * @param {*} $value - Property value
+ * @param {List} $prefixes (()) - List of prefixes to print
+ */
+@mixin prefix($property, $value, $prefixes: (webkit moz ms o)) {
+  @each $prefix in $prefixes {
+    #{'-' + $prefix + '-' + $property}: $value;
+  }
+ 
+  // Output standard non-prefixed declaration
+  #{$property}: $value;
+}
+
+/*
+ * Clear list style
+ *
+ * @author Maya Arguelles
+ */
+@mixin clear-list-style {
+    margin-bottom: unset;
+    li {
+        &:before {
+            content: unset;
+        }
+        margin-bottom: unset;
+    }
+}
+
+
+
+/*--------------------------------*\
+	 STYLES
+\*--------------------------------*/
+
+/*
+ * An important link
+ *
+ * @author Maya Arguelles
+ */
+@mixin em-link( $underline: false ) {
+    position: relative;
+    display: block;
+    @include h6-style;
+    transition: 0.4s $fancybezier;
+    @if $underline == true {
+        border-bottom: 1px solid $red;
+    }
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        transform: scaleY(0);
+        transform-origin: center bottom;
+        background: $red;
+        transition: 0.4s $fancybezier;
+        z-index: -1;
+    } &:hover {
+        transform: translateY(-4px);
+        color: $pink;
+        &::before {
+            transform: scaleY(1);
+        }
+    }
+}
+
+/*
+ * Standard margins
+ *
+ * @author Maya Arguelles
+ */
+@mixin standard-margins {
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+}

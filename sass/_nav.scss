@@ -1,0 +1,39 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: $pink;
+    width: 100%;
+    height: auto;
+}
+
+#main-navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $red;
+    padding-top: 24px;
+    height: 80px;
+    padding-bottom: 12px;
+    @include standard-margins;
+    #idle-hands-logo {
+        flex: 0 0 auto;
+        font-size: 36px;
+    } ul {
+        @include clear-list-style;
+        flex: 1 0 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        li {
+            padding-right: 40px;
+            a {
+                @include em-link;
+            }
+        }
+    } button {
+        flex: 0 0 auto;
+    }
+}

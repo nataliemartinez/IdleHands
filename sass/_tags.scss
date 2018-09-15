@@ -1,0 +1,91 @@
+h1 {
+    @include h1-style;
+    margin-bottom: 16px;
+}
+
+h2 {
+    @include h2-style;
+    margin-bottom: 8px;
+}
+
+h3 {
+    @include h3-style;
+    margin-bottom: 8px;
+}
+
+h4 {
+    @include h4-style;
+    margin-bottom: 8px;
+}
+
+h5 {
+    @include h5-style;
+    margin-bottom: 8px;
+}
+
+h6 {
+    @include h6-style;
+    margin-bottom: 8px;
+}
+
+p {
+    @include p-style;
+    margin-bottom: 12px;
+}
+
+ul, ol {
+    margin-bottom: 12px;
+    li {
+        margin-bottom: 12px;
+    }
+}
+
+ul {
+    
+}
+
+mark {
+    background: $red;
+    color: $pink;
+    font-weight: normal;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+button {
+    @include prefix(appearance, none);
+    height: 32px;
+    width: auto;
+    padding: 0 40px;
+    padding-top: 2px;
+    @include h6-style;
+    text-align: center;
+    background: transparent;
+    color: $red;
+    border: 1px solid $red;
+    border-bottom: 6px solid $red;
+    border-radius: 0;
+    overflow: hidden;
+    position: relative;
+    transition: 0.2s $fancybezier;
+    cursor: pointer;
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 100%;
+        height: 100%;
+        width: 100%;
+        background: $red;
+        transition: 0.2s $fancybezier;
+        transform: translateY(0);
+        z-index: -1;
+    } &:hover {
+        color: $pink;
+        &::before {
+            transform: translateY(-100%);
+        }
+        
+        
+    }
+}

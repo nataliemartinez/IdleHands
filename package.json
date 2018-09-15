@@ -1,0 +1,34 @@
+{
+  "name": "IdleHands",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)",
+  "main": "index.js",
+  "devDependencies": {
+    "assets-webpack-plugin": "^3.5.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.3",
+    "babel-preset-env": "^1.6.1",
+    "browser-sync-webpack-plugin": "^2.0.1",
+    "css-loader": "^0.28.10",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.2",
+    "url-loader": "^1.0.1",
+    "webpack": "^3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack -p --mode development",
+    "build": "NODE_ENV=production webpack -p",
+    "watch": "NODE_ENV=development webpack --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "^2.23.6",
+    "npm": "^6.2.0",
+    "svg-loader": "0.0.2",
+    "svg-url-loader": "^2.3.2"
+  }
+}

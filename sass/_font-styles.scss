@@ -1,0 +1,48 @@
+@mixin h1-style {
+    font-size: 48px;
+    font-weight: bolder;
+    font-family: $americana;
+    line-height: 48px;
+}
+
+@mixin h2-style {
+    font-size: 32px;
+    font-weight: bolder;
+    font-family: $americana;
+    line-height: 32px;
+}
+
+@mixin h3-style {
+    font-size: 28px;
+    font-weight: bolder;
+    font-family: $americana;
+    line-height: 28px;
+}
+
+@mixin h4-style {
+    font-size: 24px;
+    font-weight: bolder;
+    font-family: $americana;
+    line-height: 24px;
+}
+
+@mixin h5-style {
+    font-size: 20px;
+    font-weight: bolder;
+    font-family: $americana;
+    line-height: 20px;
+}
+
+@mixin h6-style {
+    font-size: 14px;
+    font-weight: bolder;
+    font-family: $americana;
+    line-height: 20px;
+    text-transform: uppercase;
+}
+
+@mixin p-style {
+    font-size: 16px;
+    font-weight: lighter;
+    line-height: 24px;
+}

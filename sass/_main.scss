@@ -1,0 +1,11 @@
+body {
+    background-color: $pink;
+    color: $red;
+    font-family: $neuzeit;
+    font-weight: lighter;
+}
+
+main {
+    @include standard-margins;
+    margin-top: 80px;
+}
