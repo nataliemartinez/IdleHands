@@ -34,6 +34,38 @@
     }
 }
 
+/*
+ * Clear button style
+ *
+ * @author Maya Arguelles
+ */
+@mixin clear-button-style {
+    padding: unset;
+    border: unset;
+    font-size: unset;
+    font-weight: unset;
+    font-family: unset;
+    line-height: unset;
+    text-transform: unset;
+    transition: unset;
+    &::before {
+        content: unset;
+        position: unset;
+        left: unset;
+        top: unset;
+        height: unset;
+        width: unset;
+        background: unset;
+        transition: unset;
+        transform: unset;
+        z-index: unset;
+    } &:hover {
+        color: unset;
+        &::before {
+            transform: unset;
+        }
+    }
+}
 
 
 /*--------------------------------*\
@@ -80,7 +112,7 @@
  * @author Maya Arguelles
  */
 @mixin standard-margins {
-    width: 100%;
-    max-width: 1024px;
-    margin: 0 auto;
+    width: calc(100% - 48px);
+    //max-width: 1024px;
+    margin: auto;
 }

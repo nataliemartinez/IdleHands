@@ -1,0 +1,56 @@
+.calendar-weekly {
+    margin-top: 40px;
+    height: calc( 100vh - 80px - 40px );
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stetch;
+}
+
+.calendar-weekly-fixed {
+    position: sticky;
+    position: -webkit-sticky;
+    left: 0;
+    .hourly-template {
+        width: 250px;
+        background: $pink;
+        border-right: 1px solid $red;
+        .hour {
+            height: $weekly_hour_vert_dim;
+            padding: 8px 12px;
+            &:nth-of-type(2n) {
+                background: rgba($red, 0.1);
+            }
+        }
+    }
+}
+
+.calendar-weekly-day {
+    flex: 0 0 250px;
+    border-left: 1px solid $red;
+    padding: 0;
+    position: relative;
+    &:first-of-type {
+        border-left: 0;
+    }
+    
+    .event {
+        width: calc(100% - 24px);
+        padding: 8px 12px;
+        border: 1px solid $red;
+        border-bottom: 6px solid $red;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        h4 {
+            padding-bottom: 4px;
+            border-bottom: 1px solid $red;
+            .pentagram {
+                cursor: pointer;
+            }
+        }
+    }
+}

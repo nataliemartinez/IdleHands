@@ -1,0 +1,134 @@
+#add-task-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    min-height: 100%;
+    overflow-y: scroll;
+    width: 100%;
+    max-width: 480px;
+    background: $pink;
+    border-left: 1px solid $red;
+    z-index: 10;
+    transform: translateX(100%);
+    transition: 0.6s $fancybezier;
+    padding: 56px 48px;
+    &.active {
+        transform: translateX(0);
+    }
+    #close-task-modal {
+        @include clear-button-style;
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        font-weight: bold;
+        font-size: 24px;
+    } form {
+        h2 {
+            margin-bottom: 24px;
+        } #scheduled-checkbox {
+            position: absolute; 
+            overflow: hidden; 
+            clip: rect(0 0 0 0); 
+            height: 1px; width: 1px; 
+            margin: -1px; padding: 0; border: 0; 
+        } .durationpicker-container {
+            height: unset !important;
+            margin-bottom: 8px;
+        } .durationpicker-innercontainer {
+            display: inline-block !important;
+            margin-right: 8px;
+            input {
+                margin-right: 8px;
+            }
+        } button[type="submit"] {
+            margin-top: 24px;
+            float: right;
+        }
+        &#add-event-form {
+            .hidden-fields {
+                position: absolute; 
+                overflow: hidden; 
+                clip: rect(0 0 0 0); 
+                height: 1px; width: 1px; 
+                margin: -1px; padding: 0; border: 0; 
+            } .unique-fields {
+                display: none;
+            }
+        }
+    }
+}
+
+.overlay {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba($red, 0.3);
+    z-index: 9;
+}
+
+#ui-datepicker-div {
+    margin-top: 8px;
+    background: $pink;
+    border: 1px solid $red;
+    padding: 8px 12px;
+    .ui-datepicker-prev {
+        @include h6-style;
+        float: left;
+    } .ui-datepicker-next {
+        @include h6-style;
+        float: right;
+    } .ui-datepicker-title {
+        @include h5-style;
+        padding: 0 24px;
+        margin-bottom: 8px;
+    } .ui-datepicker-calendar {
+        width: 100%;
+        thead {
+            @include h6-style;
+        }
+    }
+}
+
+.styled-checkbox {
+    height: 32px;
+    width: 56px;
+    border: 1px solid $red;
+    border-radius: 16px;
+    font-size: 32px;
+    position: relative;
+    transition: 0.3s $fancybezier;
+    cursor: pointer;
+    margin-bottom: 12px;
+    &:focus {
+        outline: none;
+    }
+    .styled-checkbox-toggle {
+        position: absolute;
+        left: 2px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: calc( 32px * 0.9 );
+        transition: 0.6s $fancybezier;
+        svg {
+            transition: 0.6s $fancybezier;
+            fill: $red;
+            stroke: transparent;
+        }
+    } &.active {
+        background: $red;
+        stroke: transparent;
+        .styled-checkbox-toggle {
+            transform: translateY(-50%) translateX(calc(100% - 2px)) rotate(180deg);
+        } svg {
+            fill: $pink;
+        } &:hover {
+            svg {
+                fill: $pink;
+                stroke: transparent;
+            }
+        }
+    }
+}
