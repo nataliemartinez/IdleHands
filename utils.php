@@ -1,4 +1,3 @@
-
 <?php
 
     //connect to database
@@ -52,17 +51,14 @@
 
     //edit event
     function edit_event($id, $fields, $values) {
-        $query = "INSERT INTO events (";
-        foreach ($fields as $field) {
-            $query .= $field . ", ";
+        $query = "UPDATE events SET ";
+        $i = 0;
+        while ($i < (count($fields))) {
+            $query .= "'" . $field[$i] . "' = '" . $values[$i] . "', ";
         }
+
         $query = substr($query, 0, -2);
-        $query .= ") VALUES (";
-        foreach ($values as $value) {
-            $query .= "'" . $value . "', ";
-        }
-        $query = substr($query, 0, -2);
-        $query .= ")";
+        $query .= " WHERE id='$id'";
         run_query($query);
     }
 
@@ -92,18 +88,15 @@
 
     //edit task
     function edit_task($id, $fields, $values) {
-        $query = "INSERT INTO tasks (";
-        foreach ($fields as $field) {
-            $query .= $field . ", ";
+        $query = "UPDATE tasks SET ";
+        $i = 0;
+        while ($i < (count($fields))) {
+            $query .= "'" . $field[$i] . "' = '" . $values[$i] . "', ";
         }
+
         $query = substr($query, 0, -2);
-        $query .= ") VALUES (";
-        foreach ($values as $value) {
-            $query .= "'" . $value . "', ";
-        }
-        $query = substr($query, 0, -2);
-        $query .= ")";
+        $query .= " WHERE id='$id'";
         run_query($query);
     }
-    
+
 ?>
