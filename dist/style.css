@@ -550,6 +550,23 @@ header {
     position: absolute;
     right: 24px;
     top: 12px; }
+  .event-modal form h2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start; }
+    .event-modal form h2 svg {
+      flex: 0 0 0.8em;
+      margin-right: 24px; }
+    .event-modal form h2 input {
+      flex: 1 0 0;
+      border-bottom: 0;
+      font-size: 28px;
+      font-weight: bolder;
+      font-family: "Americana Std Extra Bold", serif;
+      line-height: 28px; }
+      .event-modal form h2 input:hover {
+        border-bottom: 1px solid red; }
 
 body {
   background-color: #ffe6e6;

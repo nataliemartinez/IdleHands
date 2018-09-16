@@ -34,6 +34,18 @@
                         
                         add_task($name, $duration, $deadline, $location, $priority);
                         //echo 'TASK SUBMITTED';
+                    } else if ( isset( $_POST['is-update'] ) ) {
+                        $name = $_POST['name'];
+                        $id = $_POST['id'];
+                        $name = $_POST['name'];
+                        $start =  $_POST['start-date'];
+                        $start_time = $_POST['start-time'];
+                        $end = $_POST['end-date'];
+                        $end_time = $_POST['end-time'];
+                        $location = $_POST['location'];
+                        
+                        edit_event($id, array('name', 'start_date', 'start_time', 'end_date', 'end_time', 'location'), array($name, $start, $start_time, $end, $end_time, $location));
+                        //echo 'UPDATED!';
                     }
                 
                 ?>
