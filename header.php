@@ -49,6 +49,8 @@
                         
                         edit_event($id, array('name', 'start_date', 'start_time', 'end_date', 'end_time', 'location'), array($name, $start, $start_time, $end, $end_time, $location));
                         //echo 'UPDATED!';
+                    } else if (isset( $_POST['is-fill-gaps'] ) ) {
+                        suggest_tasks();
                     }
                 ?>
                 <a href="<?php echo $GLOBALS['idle-hands-home']; ?>" id="idle-hands-logo">
@@ -63,9 +65,14 @@
                         </a>
                     </li>
                     <li>
+                        <form id="suggest-tasks">
+                            <input type="checkbox" name="is-fill-gaps"id="is-fill-gaps" class="hidden-for-screen-readers" checked>
                         <a href="">
-                            Item
+                            <button type="submit" class="unbutton">
+                                Suggest Tasks
+                            </button>
                         </a>
+                    </form>
                     </li>
                     <li>
                         <a id="view-tasks">

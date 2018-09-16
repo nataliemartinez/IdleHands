@@ -58,6 +58,10 @@
     function delete_event($id) {
         $query = "DELETE FROM events WHERE id='$id'";
         run_query($query);
+        $datesToTest = array('2018-09-16', '2018-09-17','2018-09-18','2018-09-19','2018-09-20','2018-09-21','2018-09-22');
+        foreach( $datesToTest as $toTest ) {
+            populate_gaps( $toTest );
+        }
     }
 
     //edit event
@@ -112,6 +116,10 @@
     function delete_task($id) {
         $query = "DELETE FROM tasks WHERE id='$id'";
         run_query($query);
+        $datesToTest = array('2018-09-16', '2018-09-17','2018-09-18','2018-09-19','2018-09-20','2018-09-21','2018-09-22');
+        foreach( $datesToTest as $toTest ) {
+            populate_gaps( $toTest );
+        }
     }
 
     //edit task
@@ -165,6 +173,20 @@
         }
     }
 
+    function get_day_gaps($date) {
+        $query = "SELECT * FROM gaps WHERE start_date='$date'";
+        $result = run_query($query);
+        if (mysqli_num_rows($result) == 0) {
+            return 0;
+        } else {
+            $rows = array();
+            while($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        }
+    }
+
     //populate time gaps for a given day
     function populate_gaps($date) {
         $events = get_day_schedule($date);
@@ -183,6 +205,25 @@
         run_query($query1);
     }
 
+    //fill tasks in gaps
+    function suggest_tasks() {
+        $tasks = get_all_tasks();
+        $datesToTest = array('2018-09-16', '2018-09-17','2018-09-18','2018-09-19','2018-09-20','2018-09-21','2018-09-22');
+        $i = 0;
+        foreach ($tasks as $task) {
+            if ($task['locked'] == 0) {    
+                if (get_day_gaps($datesToTest[$i]) != 0) {
+                    fill_time_slot($datesToTest[0], $task);
+                } else {
+                    $i++;
+                }
+                if ($i > count($datesToTest)) {
+                    return 0;
+                }
+            }
+        }
+    }
+
     //fill an empty time slot
     function fill_time_slot($date, $task_id) {
         $task = get_task($task_id);
@@ -198,18 +239,25 @@
             die ("No time blocks long enough");
         }
 
+        $task_name = $task['name'];
+        $task_location = $task['location'];
         $slot_start_date = $slot['start_date'];
         $slot_start_time = $slot['start_time'];
         $slot_end_date = $slot['end_date'];
         $slot_end_time = $slot['end_time'];
         
-        $query2 = "UPDATE tasks SET start_date = '$slot_start_date', start_time = '$slot_start_time', end_date = '$slot_end_date', end_time = '$slot_end_time' WHERE id = '$task_id'";
+        $query2 = "INSERT INTO events (name, start_date, start_time, end_date, end_time, location) VALUES ('$task_name', '$slot_start_date', '$slot_start_time', '$slot_end_date', '$slot_end_time', '$task_location') ";
+
         run_query($query2);
+
+        $query3 = "UPDATE tasks SET start_date = '$slot_start_date', start_time = '$slot_start_time', end_date = '$slot_end_date', end_time = '$slot_end_time', locked=1 WHERE id = '$task_id'";
+
+        run_query($query3);
 
         $task = get_task($task_id);
         if ($task['duration'] == $slot['duration']) {
             $slot_id = $slot['id'];
-            $query3 = "DELETE FROM tasks WHERE id='$slot_id'";
+            $query3 = "DELETE FROM slots WHERE id='$slot_id'";
             run_query($query3);
         } else {
             $task_end_time = $task['end_time'];
@@ -217,6 +265,7 @@
             run_query($query3);
         }
     }
+
 
     //format time from (HH :,MM) to HHMM
     function format_time( $time ) {

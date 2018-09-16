@@ -87,6 +87,8 @@ button {
         }
         
         
+    } &.unbutton {
+        @include clear-button-style;
     }
 }
 
