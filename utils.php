@@ -103,5 +103,27 @@
     function get_day_schedule($date) {
         $query = "SELECT * FROM events WHERE start_date='$date'";
         $result = run_query($query);
-        return $result;
+        if (mysqli_num_rows($result) == 0) {
+            die ("No events on this date");
+        } else {
+            $row = mysqli_fetch_assoc($result);
+            return $row;
+        }
+    }
+
+    //fill an empty time slot
+    // function fill_time_slot($date, $task_id) {
+    //     $task = get_task($task_id);
+    //     $duration = $task['duration'];
+    //     $query = "SELECT TOP 1 * FROM gaps WHERE duration > '$duration' ORDER BY (duration - '$duration')";
+    //     $result = run_query($query);
+
+    //     if (mysqli_num_rows($result) == 0) {
+    //         die ("Could not locate empty time block");
+    //     } 
+    //     $slot = mysqli_fetch_assoc($result);
+    //     if ($slot['duration'] < 0) {
+    //         die ("No time blocks long enough");
+    //     }
+
     }
