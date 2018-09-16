@@ -1,0 +1,18 @@
+.event-modal {
+    z-index: 10;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: $pink;
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    padding: 36px 48px;
+    border: 1px solid $red;
+    #close-event-modal {
+        position: absolute;
+        right: 24px;
+        top: 12px;
+    }
+}

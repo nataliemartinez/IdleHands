@@ -68,7 +68,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
-__webpack_require__(6);
+__webpack_require__(2);
 
 /***/ }),
 /* 1 */
@@ -77,14 +77,9 @@ __webpack_require__(6);
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */
-/***/ (function(module, __webpack_exports__) {
+/* 2 */
+/***/ (function(module, exports) {
 
-"use strict";
 const $ = jQuery.noConflict();
 
 var hourHeight = 0;
@@ -123,14 +118,17 @@ $(document).ready(function () {
     });
 
     $('.overlay').click(function () {
-        $('#close-task-modal').click();
+        $('#add-task-modal').removeClass('active');
+        $('.event-modal').fadeOut(500);
+        $('.overlay').fadeOut(500);
+        setTimeout(function () {
+            $('.overlay').remove();
+            $('.event-modal').remove();
+        }, 500);
     });
 
     $('#add-task-duration').durationPicker({
-        days: {
-            label: 'days',
-            min: 0
-        }, hours: {
+        hours: {
             label: 'hours',
             min: 0,
             max: 24
@@ -181,11 +179,6 @@ $(document).ready(function () {
     });
 
     $('#add-event-start-date').datepicker({
-        prevText: "<",
-        nextText: ">"
-    });
-
-    $('#add-event-end-date').datepicker({
         prevText: "<",
         nextText: ">"
     });

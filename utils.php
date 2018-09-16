@@ -105,5 +105,3 @@
         $result = run_query($query);
         return $result;
     }
-
-?>
