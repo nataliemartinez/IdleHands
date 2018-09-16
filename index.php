@@ -86,8 +86,11 @@
                         foreach( $endTimeBuff as $timeEl ) { 
                             $end_time = $end_time . str_replace(' ', '', $timeEl);
                         }
+                        
+                        $location = $event['location'];
+                        $id = $event['id'];
             ?>
-            <div class="event" data-title="<?php echo $title; ?>" data-time="<?php echo $time; ?>" data-date="<?php echo $date; ?>" data-end-time="<?php echo $end_time; ?>" data-duration="90" data-starred="false">
+            <div class="event" data-title="<?php echo $title; ?>" data-time="<?php echo $time; ?>" data-date="<?php echo $date; ?>" data-end-time="<?php echo $end_time; ?>" data-end-date="<?php echo $date; ?>" data-duration="90" data-starred="false" data-location="<?php echo $location; ?>" data-id="<?php echo $id; ?>">
                 <h4>
                     <svg class="pentagram inactive" tabindex="0">
                         <use xlink:href="<?php echo $GLOBALS['idle-hands-home']; ?>/img/symbols.svg#pentagram"></use>
@@ -106,17 +109,60 @@
         ?>
     </div>
 </main>
-<!--<div class="overlay" style="display: block;"></div>
-<div class="event-modal">
+<div class="event-modal" style="display: none;">
     <button id="close-event-modal" class="close-button">
         ×
     </button>
-    <h2>Event title</h2>
-    <p>Event description</p>
-    <form>
-        <label></label>
+    <form id="update-information" method="post">
+        <input type="checkbox" name="is-update" id="update-identifier" class="hidden-for-screen-readers">
+        <input type="text" name="id" id="update-id" class="hidden-for-screen-readers">
+        <h2><svg class="pentagram inactive" tabindex="0"><use xlink:href="<?php echo $GLOBALS['idle-hands-home']; ?>/img/symbols.svg#pentagram"></use></svg><input type="text" name="name" id="update-name"></h2>
+        <p>Event description</p>
+        <table>
+            <tr>
+                <td>
+                    <label>Start Date</label>
+                </td>
+                <td>
+                    <input type="text" name="start-date" id="update-start-date">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Start Time</label>
+                </td>
+                <td>
+                    <input type="text" name="start-time" id="update-start-time">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>End Date</label>
+                </td>
+                <td>
+                    <input type="text" name="end-date" id="update-end-date">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>End Time</label>
+                </td>
+                <td>
+                    <input type="text" name="end-time" id="update-end-time">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Location</label>
+                </td>
+                <td>
+                    <input type="text" name="location" id="update-location">
+                </td>
+            </tr>
+        </table>
+        <button type="submit">update</button>
     </form>
-</div>-->
+</div>
 <?php
     include 'footer.php';
 ?>

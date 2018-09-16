@@ -117,13 +117,24 @@ $(document).ready(function () {
         $('#close-task-modal').click();
     });
 
+    $('#close-event-modal').click(function () {
+        $('.event-modal').fadeOut(500);
+        $('.overlay').fadeOut(500);
+        setTimeout(function () {
+            $('.overlay').remove();
+        }, 500);
+    });
+
+    $('#close-event-modal').keypress(function () {
+        $('#close-event-modal').click();
+    });
+
     $('.overlay').click(function () {
         $('#add-task-modal').removeClass('active');
         $('.event-modal').fadeOut(500);
         $('.overlay').fadeOut(500);
         setTimeout(function () {
             $('.overlay').remove();
-            $('.event-modal').remove();
         }, 500);
     });
 
@@ -247,6 +258,17 @@ $(document).ready(function () {
         position_event($(this));
     });
 
+    /*
+     * Event modal
+     */
+    $('.event-title').click(function () {
+        $('body').append('<div class="overlay"></div>');
+        $('.overlay').fadeIn(500);
+        $('.event-modal').fadeIn(500);
+        clear_modal();
+        populate_modal($(this).parent().parent());
+    });
+
     // end events / tasks functions
 
 });
@@ -260,6 +282,39 @@ function position_event($event) {
     console.log(posY);
 
     $event.css('top', posY + 'px');
+}
+
+function clear_modal() {
+    let modalFormInputs = $('.event-modal form input');
+    modalFormInputs.each(function () {
+        $(this).val("");
+    });
+}
+
+function populate_modal($event) {
+    let starred = $event.attr('data-starred');
+    let title = $event.attr('data-title');
+    let startTime = $event.attr('data-time');
+    let startDate = $event.attr('data-date');
+    let endDate = $event.attr('data-end-date');
+    let endTime = $event.attr('data-end-time');
+    let location = $event.attr('data-location');
+    let id = $event.attr('data-id');
+
+    if (starred == 'true') {
+        $('.event-modal .pentagram').removeClass('inactive');
+    } else {
+        $('.event-modal .pentagram').addClass('inactive');
+    }
+
+    $('#update-name').val(title);
+    $('#update-start-date').val(startDate);
+    $('#update-start-time').val(startTime);
+    $('#update-end-date').val(endDate);
+    $('#update-end-time').val(endTime);
+    $('#update-location').val(location);
+    $('#update-id').val(id);
+    $('#update-identifier').prop('checked', true);
 }
 
 /***/ })

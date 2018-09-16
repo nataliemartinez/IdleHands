@@ -55,7 +55,8 @@
         $query = "UPDATE events SET ";
         $i = 0;
         while ($i < (count($fields))) {
-            $query .= "'" . $field[$i] . "' = '" . $values[$i] . "', ";
+            $query .= $fields[$i] . ' = "' . $values[$i] . '", ';
+            $i++;
         }
 
         $query = substr($query, 0, -2);
