@@ -25,9 +25,11 @@
             $conn = connect_db();
             $query = "CREATE TABLE IF NOT EXISTS events(
                 id INT(6) NOT NULL AUTO_INCREMENT,
-                event_name VARCHAR(128) NOT NULL,
-                start_date TIMESTAMP NOT NULL,
-                end_date TIMESTAMP NOT NULL,
+                name VARCHAR(128) NOT NULL,
+                start_date DATE NOT NULL,
+                start_time TIME NOT NULL,
+                end_date DATE NOT NULL,
+                end_time TIME NOT NULL,
                 location VARCHAR(128),
                 PRIMARY KEY (id))";
 
@@ -42,12 +44,15 @@
             $conn = connect_db();
             $query = "CREATE TABLE IF NOT EXISTS tasks(
                 id INT(6) NOT NULL AUTO_INCREMENT,
-                task_name VARCHAR(128) NOT NULL,
-                duration TIMESTAMP NOT NULL,
-                start_date TIMESTAMP,
-                end_date TIMESTAMP,
+                name VARCHAR(128) NOT NULL,
+                duration VARCHAR(16) NOT NULL,
+                deadline DATE,
+                start_date DATE,
+                start_time TIME,
+                end_date DATE,
+                end_time TIME,
                 location VARCHAR(128),
-                priority VARCHAR(8),
+                priority SMALLINT(8),
                 locked TINYINT(1) NOT NULL DEFAULT 0,
                 PRIMARY KEY (id))";
 
