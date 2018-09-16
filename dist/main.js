@@ -68,7 +68,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
-__webpack_require__(6);
+__webpack_require__(2);
 
 /***/ }),
 /* 1 */
@@ -77,14 +77,9 @@ __webpack_require__(6);
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */
-/***/ (function(module, __webpack_exports__) {
+/* 2 */
+/***/ (function(module, exports) {
 
-"use strict";
 const $ = jQuery.noConflict();
 
 var hourHeight = 0;

@@ -1,3 +1,6 @@
+<?php 
+    include "utils.php";
+?>
 <!DOCTYPE html>
 <html>
     <?php
@@ -41,7 +44,7 @@
             </nav>
         </header>
         <aside id="add-task-modal">
-            <button id="close-task-modal">
+            <button id="close-task-modal" class="close-button">
                 ×
             </button>
             <form id="add-task-form">
