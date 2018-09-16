@@ -100,7 +100,9 @@
 
     //add task
     function add_task($name, $duration, $deadline, $location, $priority) {
-        $query = "INSERT INTO tasks (name, duration, deadline, location, priority) VALUES ('$name', '$duration', DATE '$deadline', '$location', '$priority')";
+        $newduration = format_duration($duration);
+        
+        $query = "INSERT INTO tasks (name, duration, deadline, location, priority) VALUES ('$name', '$newduration', DATE '$deadline', '$location', '$priority')";
         run_query($query);
         
         $gapsQuery = "DELETE * FROM gaps";
@@ -173,6 +175,25 @@
         }
     }
 
+    //get all tasks
+    function get_all_events_and_tasks() {
+        $query = "SELECT * FROM tasks ORDER BY start_date ASC";
+        $query2 = "SELECT * FROM events ORDER BY start_date ASC";
+        $result = run_query($query);
+        $result2 = run_query($query2);
+        if (mysqli_num_rows($result) == 0 && mysqli_num_rows($result2) == 0) {
+            return 0;
+        } else {
+            $rows = array();
+            while($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            } while ($row = $result2->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        }
+    }
+
     function get_day_gaps($date) {
         $query = "SELECT * FROM gaps WHERE start_date='$date'";
         $result = run_query($query);
@@ -213,7 +234,7 @@
         foreach ($tasks as $task) {
             if ($task['locked'] == 0) {    
                 if (get_day_gaps($datesToTest[$i]) != 0) {
-                    fill_time_slot($datesToTest[0], $task);
+                    fill_time_slot($datesToTest[0], $task['id']);
                 } else {
                     $i++;
                 }
@@ -243,8 +264,8 @@
         $task_location = $task['location'];
         $slot_start_date = $slot['start_date'];
         $slot_start_time = $slot['start_time'];
-        $slot_end_date = $slot['end_date'];
-        $slot_end_time = $slot['end_time'];
+        $slot_end_date = $slot['start_date'];
+        $slot_end_time = $slot['start_time'] + $task['duration'];
         
         $query2 = "INSERT INTO events (name, start_date, start_time, end_date, end_time, location) VALUES ('$task_name', '$slot_start_date', '$slot_start_time', '$slot_end_date', '$slot_end_time', '$task_location') ";
 
@@ -288,4 +309,26 @@
         $duration = $diffMinutes + ($diffHours * 60);
         
         return $duration;
+    }
+
+    // format string duration
+    function format_duration( $string ) {
+        $formatArr = explode(',', $string);
+        $formatArr[0] = str_replace(array('hours', 'minutes', ' ', ','), '',$formatArr[0]);
+        $formatArr[1] = str_replace(array('hours', 'minutes', ' ', ','), '',$formatArr[1]);
+        $timeInt = (intval($formatArr[0]) * 60) + intval($formatArr[1]);
+        
+        return $timeInt;
+    }
+
+    // add time
+    function add_time( $t1, $t2 ) {
+        $t1Minutes = $t1 % 100;
+        $t2Minutes = $t2 % 100;
+        $t1Hours =(($t1 - $t1Minutes)/100);
+        $t2Hours =(($t2 - $t2Minutes)/100);
+        
+        $sum = (($t1Hours + $t2Hours)*100) + ($t1Minutes + $t2Minutes);
+        
+        return $sum;
     }

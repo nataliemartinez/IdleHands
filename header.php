@@ -15,8 +15,9 @@
         <header>
             <nav id="main-navigation" role="navigation" aria-label="Main Navigation">
                 <?php
+                //echo format_duration('1 hours, 20 minutes');
                 //echo get_duration(1230, 2359);
-                    fill_time_slot('2018-09-16', 2);
+                    //fill_time_slot('2018-09-16', 2);
                     //populate_gaps('2018-09-18');
                     if ( isset( $_POST['is-event'] ) ) {
                         $name = $_POST['name'];
@@ -60,12 +61,7 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="">
-                            Item
-                        </a>
-                    </li>
-                    <li>
-                        <form id="suggest-tasks">
+                        <form id="suggest-tasks" method="post">
                             <input type="checkbox" name="is-fill-gaps"id="is-fill-gaps" class="hidden-for-screen-readers" checked>
                         <a href="">
                             <button type="submit" class="unbutton">
@@ -76,7 +72,7 @@
                     </li>
                     <li>
                         <a id="view-tasks">
-                            Tasks
+                            Tasks List
                         </a>
                     </li>
                 </ul>
@@ -158,7 +154,7 @@
                 ×
             </button>
             <?php
-                $tasks = get_all_tasks();
+                $tasks = get_all_events_and_tasks();
                 if ( $tasks != 0 ) {
             ?>
             <h2>Tasks list</h2>
@@ -176,7 +172,15 @@
                 if ( count($unassigned) > 0 && $unassigned[0] != '' ) {
             ?>
             <h4>Unassigned</h4>
-            <table>
+            <table cellpadding="4px 8px">
+                <thead>
+                    <td>
+                        <h6>Task name</h6>
+                    </td>
+                    <td>
+                        <h6>Task duration</h6>
+                    </td>
+                </thead>
             <?php 
                 foreach( $unassigned as $task ) { 
                     //print_r($task);
@@ -186,7 +190,7 @@
                         <?php echo $task['name']; ?>
                     </td>
                     <td>
-                        <?php echo $task['duration']; ?>
+                        <?php echo $task['duration']; ?> minutes
                     </td>
                 </tr>
             <?php 
@@ -197,7 +201,15 @@
                 }
             ?>
             <h4>Assigned</h4>
-            <table>
+            <table  cellpadding="4px 8px">
+                <thead>
+                    <td>
+                        <h6>Task name</h6>
+                    </td>
+                    <td>
+                        <h6>Task date</h6>
+                    </td>
+                </thead>
             <?php 
                 foreach( $assigned as $task ) { 
                     //print_r($task);

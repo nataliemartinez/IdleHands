@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    min-height: 100%;
+    height: 100%;
     overflow-y: scroll;
     width: 100%;
     max-width: 480px;
@@ -19,5 +19,37 @@
         position: absolute;
         right: 12px;
         top: 12px;
+    } table {
+        width: 100%;
+        display: block;
+        tbody {
+            display: block;
+        }
+        thead {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+            td {
+                display: block;
+                flex: 1 0 0;
+                padding: 4px 8px;
+            }
+        }
+        tr {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+            &:nth-of-type(2n) {
+                background: rgba($red, 0.1);
+            } td {
+                display: block;
+                flex: 1 0 0;
+                padding: 4px 8px;
+            }
+        }
     }
 }
