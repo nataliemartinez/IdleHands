@@ -20,6 +20,7 @@
     //execute mySQL query
     function run_query($query, $result_mode=MYSQLI_STORE_RESULT) {
         $conn = connect_db();
+        //echo $query;
         $result = mysqli_query($conn, $query, $result_mode);
         mysqli_close($conn);
         return $result;
@@ -76,7 +77,7 @@
 
     //add task
     function add_task($name, $duration, $location, $priority) {
-        $query = "INSERT INTO tasks (name, duration, location) VALUES ('$name', '$start', '$end', '$location')";
+        $query = "INSERT INTO tasks (name, duration, location, priority) VALUES ('$name', '$duration', '$location', '$priority')";
         run_query($query);
     }
 
