@@ -1,0 +1,23 @@
+#view-task-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    min-height: 100%;
+    overflow-y: scroll;
+    width: 100%;
+    max-width: 480px;
+    background: $pink;
+    border-left: 1px solid $red;
+    z-index: 10;
+    transform: translateX(100%);
+    transition: 0.6s $fancybezier;
+    padding: 56px 48px;
+    &.active {
+        transform: translateX(0);
+    }
+    #close-view-modal {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+    }
+}

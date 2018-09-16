@@ -116,6 +116,21 @@
         }
     }
 
+    //get all tasks
+    function get_all_tasks() {
+        $query = "SELECT * FROM tasks ORDER BY start_date ASC";
+        $result = run_query($query);
+        if (mysqli_num_rows($result) == 0) {
+            return 0;
+        } else {
+            $rows = array();
+            while($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        }
+    }
+
     //fill an empty time slot
     // function fill_time_slot($date, $task_id) {
     //     $task = get_task($task_id);

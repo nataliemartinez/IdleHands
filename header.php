@@ -47,7 +47,6 @@
                         edit_event($id, array('name', 'start_date', 'start_time', 'end_date', 'end_time', 'location'), array($name, $start, $start_time, $end, $end_time, $location));
                         //echo 'UPDATED!';
                     }
-                
                 ?>
                 <a href="<?php echo $GLOBALS['idle-hands-home']; ?>" id="idle-hands-logo">
                     <svg>
@@ -66,8 +65,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
-                            Item
+                        <a id="view-tasks">
+                            Tasks
                         </a>
                     </li>
                 </ul>
@@ -143,4 +142,69 @@
                     <button type="submit">Add task</button>
                 </div>
             </form>
+        </aside>
+        <aside id="view-task-modal">
+            <button id="close-view-modal" class="close-button">
+                ×
+            </button>
+            <?php
+                $tasks = get_all_tasks();
+                if ( $tasks != 0 ) {
+            ?>
+            <h2>Tasks list</h2>
+            <?php 
+                $unassigned = array();
+                $assigned = array();
+                foreach( $tasks as $task ) { 
+                    if ( $task['start_date'] == '' ) { 
+                        $unassigned[] = $task;
+                    } else {
+                        $assigned[] = $task;
+                    }
+                }
+            
+                if ( count($unassigned) > 0 && $unassigned[0] != '' ) {
+            ?>
+            <h3>Unassigned</h3>
+            <table>
+            <?php 
+                foreach( $unassigned as $task ) { 
+                    //print_r($task);
+            ?>
+                <tr>
+                    <td>
+                        <?php echo $task['name']; ?>
+                    </td>
+                    <td>
+                        <?php echo $task['duration']; ?>
+                    </td>
+                </tr>
+            <?php 
+                } 
+            ?>
+            </table>
+            <?php
+                }
+            ?>
+            <h3>Assigned</h3>
+            <table>
+            <?php 
+                foreach( $assigned as $task ) { 
+                    //print_r($task);
+            ?>
+                <tr>
+                    <td>
+                        <?php echo $task['name']; ?>
+                    </td>
+                    <td>
+                        <?php echo $task['start_date']; ?>
+                    </td>
+                </tr>
+            <?php 
+                } 
+            ?>
+            </table>
+            <?php } else { ?>
+            <h2>Sorry, there are no tasks to show.</h2>
+            <?php } ?>
         </aside>

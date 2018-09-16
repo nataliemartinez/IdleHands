@@ -271,6 +271,25 @@ $(document).ready(function () {
 
     // end events / tasks functions
 
+
+    /*--------------------------------*\
+        TASK VIEW FUNCTIONS
+    \*--------------------------------*/
+    $('#view-tasks').click(function () {
+        $('#view-task-modal').addClass('active');
+        $('body').append('<div class="overlay"></div>');
+        $('.overlay').fadeIn(500);
+    });
+
+    $('#close-view-modal').click(function () {
+        $('#view-task-modal').removeClass('active');
+        $('.overlay').fadeOut(500);
+        setTimeout(function () {
+            $('.overlay').remove();
+        }, 500);
+    });
+
+    // end task viewer functions
 });
 
 function position_event($event) {
