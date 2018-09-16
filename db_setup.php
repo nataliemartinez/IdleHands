@@ -43,7 +43,7 @@
             $query = "CREATE TABLE IF NOT EXISTS tasks(
                 id INT(6) NOT NULL AUTO_INCREMENT,
                 task_name VARCHAR(128) NOT NULL,
-                duration TIMESTAMP NOT NULL,
+                duration VARCHAR(8) NOT NULL,
                 start_date TIMESTAMP,
                 end_date TIMESTAMP,
                 location VARCHAR(128),

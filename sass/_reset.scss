@@ -21,3 +21,7 @@ a {
     color: inherit;
     text-decoration: none;
 }
+
+.hidden-for-screen-readers {
+    @include hide-for-screen-readers;
+}
