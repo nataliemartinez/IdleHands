@@ -15,6 +15,9 @@
         <header>
             <nav id="main-navigation" role="navigation" aria-label="Main Navigation">
                 <?php
+                //echo get_duration(1230, 2359);
+                    fill_time_slot('2018-09-16', 2);
+                    //populate_gaps('2018-09-18');
                     if ( isset( $_POST['is-event'] ) ) {
                         $name = $_POST['name'];
                         $start = $_POST['start-date'];
@@ -165,7 +168,7 @@
             
                 if ( count($unassigned) > 0 && $unassigned[0] != '' ) {
             ?>
-            <h3>Unassigned</h3>
+            <h4>Unassigned</h4>
             <table>
             <?php 
                 foreach( $unassigned as $task ) { 
@@ -186,7 +189,7 @@
             <?php
                 }
             ?>
-            <h3>Assigned</h3>
+            <h4>Assigned</h4>
             <table>
             <?php 
                 foreach( $assigned as $task ) { 

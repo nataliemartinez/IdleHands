@@ -71,6 +71,7 @@
                 start_time SMALLINT(8) NOT NULL,
                 end_date DATE NOT NULL,
                 end_time SMALLINT(8) NOT NULL,
+                duration SMALLINT(8) NOT NULL,
                 PRIMARY KEY (id))";
 
             if (mysqli_query($conn, $query)) {

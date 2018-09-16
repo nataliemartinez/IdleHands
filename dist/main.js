@@ -293,9 +293,9 @@ $(document).ready(function () {
 });
 
 function position_event($event) {
-    let time = $event.attr('data-time').split(":");
-    let minute = time[1];
-    let hour = time[0];
+    let time = $event.attr('data-time');
+    let hour = (time - time % 100) / 100 - 1;
+    let minute = time % 100;
 
     let posY = hour * hourHeight + Math.floor(minute / 60 * hourHeight);
     console.log(posY);
