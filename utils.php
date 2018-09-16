@@ -103,7 +103,7 @@
 
     //get events for one day
     function get_day_schedule($date) {
-        $query = "SELECT * FROM events WHERE start_date='$date'";
+        $query = "SELECT * FROM events WHERE start_date='$date' ORDER BY (start_time)";
         $result = run_query($query);
         if (mysqli_num_rows($result) == 0) {
             return 0;
@@ -131,19 +131,47 @@
         }
     }
 
+    //populate time gaps for a given day
+    function populate_gaps($date) {
+        $events = get_day_schedule($date);
+        $gap_start = "0000";
+        foreach ($events as $event) {
+            $query = "INSERT INTO gaps (start_date, start_time, end_date, end_time) VALUES ('$date', '$gap_start', '$date', '$event['end_time']')";
+            run_query($query);
+            $gap_start = $event['end_time'];
+        }
+
+        $query1 = "INSERT INTO gaps (start_date, start_time, end_date, end_time) VALUES ('$date', '$gap_start', '$date', '2459')";
+        run_query($query1);
+    }
+
     //fill an empty time slot
-    // function fill_time_slot($date, $task_id) {
-    //     $task = get_task($task_id);
-    //     $duration = $task['duration'];
-    //     $query = "SELECT TOP 1 * FROM gaps WHERE duration > '$duration' ORDER BY (duration - '$duration')";
-    //     $result = run_query($query);
+    function fill_time_slot($date, $task_id) {
+        $task = get_task($task_id);
+        $duration = $task['duration'];
+        $query1 = "SELECT TOP 1 * FROM gaps WHERE duration > '$duration' ORDER BY (duration - '$duration')";
+        $result = run_query($query1);
 
-    //     if (mysqli_num_rows($result) == 0) {
-    //         die ("Could not locate empty time block");
-    //     } 
-    //     $slot = mysqli_fetch_assoc($result);
-    //     if ($slot['duration'] < 0) {
-    //         die ("No time blocks long enough");
-    //     }
+        if (mysqli_num_rows($result) == 0) {
+            die ("Could not locate empty time block");
+        } 
+        $slot = mysqli_fetch_assoc($result);
+        if ($slot['duration'] < 0) {
+            die ("No time blocks long enough");
+        }
 
-    //}
+        $query2 = "UPDATE tasks SET start_date = '$slot['start_date']', start_time = '$slot['start_time']', end_date = '$slot['end_date']', end_time = '$slot['end_time'] WHERE id = '$task_id'";
+        run_query($query2);
+
+        $task = get_task($task_id);
+        if ($task['duration'] == $slot['duration']) {
+            $query3 = "DELETE FROM tasks WHERE id='$slot['id']'";
+            run_query($query3)
+        } else {
+            $query3 = "UPDATE gaps SET start_time = '$task['end_time']'";
+            run_query($query3);
+        }
+
+
+
+    }
