@@ -55,8 +55,7 @@
         $query = "UPDATE events SET ";
         $i = 0;
         while ($i < (count($fields))) {
-            $query .= $fields[$i] . ' = "' . $values[$i] . '", ';
-            $i++;
+            $query .= "'" . $field[$i] . "' = '" . $values[$i] . "', ";
         }
 
         $query = substr($query, 0, -2);
@@ -103,7 +102,7 @@
 
     //get events for one day
     function get_day_schedule($date) {
-        $query = "SELECT * FROM events WHERE start_date='$date'";
+        $query = "SELECT * FROM events WHERE start_date='$date' ORDER BY (start_time)";
         $result = run_query($query);
         if (mysqli_num_rows($result) == 0) {
             return 0;
@@ -114,6 +113,20 @@
             }
             return $rows;
         }
+    }
+
+    //populate time gaps for a given day
+    function populate_gaps($date) {
+        $events = get_day_schedule($date);
+        $gap_start = "0000";
+        foreach ($events as $event) {
+            $query = "INSERT INTO gaps (start_date, start_time, end_date, end_time) VALUES ('$date', '$gap_start', '$date', '$event['end_time']')";
+            run_query($query);
+            $gap_start = $event['end_time'];
+        }
+
+        $query1 = "INSERT INTO gaps (start_date, start_time, end_date, end_time) VALUES ('$date', '$gap_start', '$date', '2459')";
+        run_query($query1);
     }
 
     //fill an empty time slot
