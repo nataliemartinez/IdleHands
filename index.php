@@ -3,6 +3,11 @@
 ?>
 <main id="main">
     <div class="calendar-weekly">
+        <?php
+            $startdate = 15;
+            $month = 9;
+            $year = 2018;
+        ?>
         <aside class="calendar-weekly-fixed">
             <div class="hourly-template">
                 <?php
@@ -26,14 +31,28 @@
                 ?>
             </div>
         </aside>
+        <nav class="calendar-weekly-days-nav">
+            <?php 
+                $dayscount = 0;
+                while ( $dayscount < 7 ) {
+                    $dayscount++;
+                    $day = $startdate + $dayscount;
+            ?>
+            <div class="calendar-weekly-day-header">
+                <h6><?php echo $month . "/" . $day; ?></h6>
+            </div>
+            <?php      
+                }
+            ?>
+        </nav>
         <?php
-        $dayscount = 0;
-        while ( $dayscount < 7 ) {
-            $dayscount++;
-            $time = (rand(0,24) * 100) + rand(0,60);
-            $title = "Event title";
+            $dayscount = 0;
+            while ( $dayscount < 7 ) {
+                $dayscount++;
+                $day = $startdate + $dayscount;
+                $date = $year . "-" . sprintf('%02d', $month) . "-" . sprintf('%02d', $day);
         ?>
-        <div class="calendar-weekly-day">
+        <div class="calendar-weekly-day" data-date="<?php echo $date; ?>">
             <div class="hourly-template">
                 <?php
                     $hourscount = 0;
@@ -48,7 +67,27 @@
                     }
                 ?>
             </div>
-            <div class="event" data-title="<?php echo $title; ?>" data-time="<?php echo $time; ?>" data-duration="90" data-starred="false">
+            <?php
+                $curEvents = 0;
+                $curEvents = get_day_schedule($date);
+                if ( $curEvents != 0 ) {
+                    //print_r($curEvents);
+                    foreach( $curEvents as $event ) { 
+                        //print_r($event);
+                        $title = $event['name'];
+                        $timeBuff = explode(',', $event['start_time']);
+                        $time = "";
+                        foreach( $timeBuff as $timeEl ) { 
+                            $time = $time . str_replace(' ', '', $timeEl);
+                        }
+                        
+                        $endTimeBuff = explode(',', $event['end_time']);
+                        $end_time = "";
+                        foreach( $endTimeBuff as $timeEl ) { 
+                            $end_time = $end_time . str_replace(' ', '', $timeEl);
+                        }
+            ?>
+            <div class="event" data-title="<?php echo $title; ?>" data-time="<?php echo $time; ?>" data-date="<?php echo $date; ?>" data-end-time="<?php echo $end_time; ?>" data-duration="90" data-starred="false">
                 <h4>
                     <svg class="pentagram inactive" tabindex="0">
                         <use xlink:href="<?php echo $GLOBALS['idle-hands-home']; ?>/img/symbols.svg#pentagram"></use>
@@ -57,6 +96,10 @@
                 </h4>
                 <p>Event description</p>
             </div>
+            <?php
+                    }
+                } 
+            ?>
         </div>
         <?php
         }

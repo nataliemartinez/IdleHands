@@ -20,7 +20,7 @@
     //execute mySQL query
     function run_query($query, $result_mode=MYSQLI_STORE_RESULT) {
         $conn = connect_db();
-        //echo $query;
+        // echo $query;
         $result = mysqli_query($conn, $query, $result_mode);
         mysqli_close($conn);
         return $result;
@@ -39,8 +39,8 @@
     }
 
     //add event
-    function add_event($name, $start, $end, $location) {
-        $query = "INSERT INTO events (name, start_date, end_date, location) VALUES ('$name', '$start', '$end', '$location')";
+    function add_event($name, $start, $start_time, $end, $end_time, $location) {
+        $query = "INSERT INTO events (name, start_date, start_time, end_date, end_time, location) VALUES ('$name', DATE '$start', '$start_time', DATE '$end', '$end_time', '$location')";
         run_query($query);
     }
 
@@ -76,8 +76,8 @@
     }
 
     //add task
-    function add_task($name, $duration, $location, $priority) {
-        $query = "INSERT INTO tasks (name, duration, location, priority) VALUES ('$name', '$duration', '$location', '$priority')";
+    function add_task($name, $duration, $deadline, $location, $priority) {
+        $query = "INSERT INTO tasks (name, duration, deadline, location, priority) VALUES ('$name', '$duration', DATE '$deadline', '$location', '$priority')";
         run_query($query);
     }
 
@@ -105,10 +105,13 @@
         $query = "SELECT * FROM events WHERE start_date='$date'";
         $result = run_query($query);
         if (mysqli_num_rows($result) == 0) {
-            die ("No events on this date");
+            return 0;
         } else {
-            $row = mysqli_fetch_assoc($result);
-            return $row;
+            $rows = array();
+            while($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
         }
     }
 
@@ -127,4 +130,4 @@
     //         die ("No time blocks long enough");
     //     }
 
-    }
+    //}

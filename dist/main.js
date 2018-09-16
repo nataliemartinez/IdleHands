@@ -142,7 +142,8 @@ $(document).ready(function () {
 
     $('#add-task-deadline').datepicker({
         prevText: "<",
-        nextText: ">"
+        nextText: ">",
+        dateFormat: "yy-mm-dd"
     });
 
     $('#scheduled-checkbox').change(function () {
@@ -180,7 +181,40 @@ $(document).ready(function () {
 
     $('#add-event-start-date').datepicker({
         prevText: "<",
-        nextText: ">"
+        nextText: ">",
+        dateFormat: "yy-mm-dd"
+    });
+
+    $('#add-event-start-time').durationPicker({
+        hours: {
+            label: ':',
+            min: 0,
+            max: 24
+        },
+        minutes: {
+            label: '',
+            min: 0,
+            max: 60
+        }
+    });
+
+    $('#add-event-end-date').datepicker({
+        prevText: "<",
+        nextText: ">",
+        dateFormat: "yy-mm-dd"
+    });
+
+    $('#add-event-end-time').durationPicker({
+        hours: {
+            label: ':',
+            min: 0,
+            max: 24
+        },
+        minutes: {
+            label: '',
+            min: 0,
+            max: 60
+        }
     });
 
     // end header functions
@@ -218,9 +252,9 @@ $(document).ready(function () {
 });
 
 function position_event($event) {
-    let time = $event.attr('data-time');
-    let minute = time % 100;
-    let hour = (time - minute) / 100 - 1;
+    let time = $event.attr('data-time').split(":");
+    let minute = time[1];
+    let hour = time[0];
 
     let posY = hour * hourHeight + Math.floor(minute / 60 * hourHeight);
     console.log(posY);

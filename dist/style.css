@@ -429,6 +429,19 @@ header {
   #add-task-modal form button[type="submit"] {
     margin-top: 24px;
     float: right; }
+  #add-task-modal form .field-pairs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch; }
+    #add-task-modal form .field-pairs .pair-fill {
+      flex: 1 0 0; }
+    #add-task-modal form .field-pairs .pair-auto {
+      flex: 0 0 auto; }
+    #add-task-modal form .field-pairs > * {
+      margin-right: 24px; }
+      #add-task-modal form .field-pairs > *:last-of-type {
+        margin-right: 0; }
   #add-task-modal form#add-event-form .hidden-fields {
     position: absolute;
     overflow: hidden;
@@ -495,6 +508,7 @@ header {
   position: relative;
   transition: 0.3s cubic-bezier(0.85, 0.01, 0.33, 1);
   cursor: pointer;
+  margin-top: 8px;
   margin-bottom: 12px; }
   .styled-checkbox:focus {
     outline: none; }
@@ -502,7 +516,7 @@ header {
     position: absolute;
     left: 2px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(calc(-50% + 1px));
     height: calc( 32px * 0.9);
     transition: 0.6s cubic-bezier(0.85, 0.01, 0.33, 1); }
     .styled-checkbox .styled-checkbox-toggle svg {
@@ -560,6 +574,7 @@ main {
   align-items: flex-start; }
 
 .calendar-weekly-fixed {
+  padding-top: 24px;
   position: sticky;
   position: -webkit-sticky;
   left: 0;
@@ -569,6 +584,28 @@ main {
     width: 120px;
     background: #ffe6e6;
     border-right: 1px solid red; }
+
+.calendar-weekly-days-nav {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px solid red;
+  background: #ffe6e6;
+  margin-left: 120px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 3; }
+  .calendar-weekly-days-nav .calendar-weekly-day-header {
+    flex: 0 0 250px;
+    height: 24px;
+    background: #ffe6e6;
+    border-bottom: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
 
 .hour {
   height: 48px;
@@ -581,10 +618,10 @@ main {
   border-left: 1px solid red;
   padding: 0;
   position: relative;
-  z-index: 3; }
+  z-index: 2;
+  margin-top: 24px; }
   .calendar-weekly-day:first-of-type {
-    border-left: 0;
-    margin-left: 120px; }
+    border-left: 0; }
   .calendar-weekly-day .event {
     width: calc(100% - 24px);
     padding: 8px 12px;

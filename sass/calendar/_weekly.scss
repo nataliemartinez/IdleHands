@@ -11,6 +11,7 @@
 }
 
 .calendar-weekly-fixed {
+    padding-top: 24px;
     position: sticky;
     position: -webkit-sticky;
     left: 0;
@@ -20,6 +21,30 @@
         width: 120px;
         background: $pink;
         border-right: 1px solid $red;
+    }
+}
+
+.calendar-weekly-days-nav {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    width: 100%;
+    border-bottom: 1px solid $red;
+    background: $pink;
+    margin-left: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 3;
+    .calendar-weekly-day-header {
+        flex: 0 0 250px;
+        height: 24px;
+        background: $pink;
+        border-bottom: 1px solid $red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 
@@ -36,10 +61,11 @@
     border-left: 1px solid $red;
     padding: 0;
     position: relative;
-    z-index: 3;
+    z-index: 2;
+    margin-top: 24px;
     &:first-of-type {
         border-left: 0;
-        margin-left: 120px;
+        //margin-left: 120px;
     }
     
     .event {

@@ -27,9 +27,9 @@
                 id INT(6) NOT NULL AUTO_INCREMENT,
                 name VARCHAR(128) NOT NULL,
                 start_date DATE NOT NULL,
-                start_time TIME NOT NULL,
+                start_time VARCHAR(8) NOT NULL,
                 end_date DATE NOT NULL,
-                end_time TIME NOT NULL,
+                end_time VARCHAR(8) NOT NULL,
                 location VARCHAR(128),
                 PRIMARY KEY (id))";
 

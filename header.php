@@ -16,16 +16,26 @@
             <nav id="main-navigation" role="navigation" aria-label="Main Navigation">
                 <?php
                     if ( isset( $_POST['is-event'] ) ) {
-                        echo 'EVENT SUBMITTED';
+                        $name = $_POST['name'];
+                        $start = $_POST['start-date'];
+                        $start_time = $_POST['start-time'];
+                        $end = $_POST['end-date'];
+                        $end_time = $_POST['end-time'];
+                        $location = $_POST['location'];
+                        
+                        add_event($name, $start, $start_time, $end, $end_time, $location);
+                        //echo 'EVENT SUBMITTED';
                     } else if ( isset( $_POST['is-task'] ) ) {
                         $name = $_POST['name'];
                         $duration = $_POST['duration'];
+                        $deadline = $_POST['deadline'];
                         $location = $_POST['location'];
                         $priority = $_POST['priority'];
                         
-                        echo add_task($name, $duration, $location, $priority);
-                        echo 'TASK SUBMITTED';
+                        add_task($name, $duration, $deadline, $location, $priority);
+                        //echo 'TASK SUBMITTED';
                     }
+                
                 ?>
                 <a href="<?php echo $GLOBALS['idle-hands-home']; ?>" id="idle-hands-logo">
                     <svg>
@@ -92,14 +102,30 @@
             <form id="add-event-form" method="post">
                 <div class="hidden-fields">
                     <label>Name:</label>
-                    <input type="text" name="name" id="add-event-name">
+                    <input type="text" name="name" id="add-event-name" required>
                     <input type="checkbox" name="is-event" class="hidden-for-screen-readers" checked>
                 </div>
                 <div class="unique-fields">
-                    <label>Start Date:</label>
-                    <input type="text" name="start-date" id="add-event-end-date">
-                    <label>End Date:</label>
-                    <input type="text" name="end-date" id="add-event-end-date">
+                    <div class="field-pairs">
+                        <div class="pair-fill">
+                            <label>Start Date:</label>
+                            <input type="text" name="start-date" id="add-event-start-date" required>
+                        </div>
+                        <div class="pair-auto">
+                            <label>Start Time:</label>
+                            <input type="text" name="start-time" id="add-event-start-time" required>
+                        </div>
+                    </div>
+                    <div class="field-pairs">
+                        <div class="pair-fill">
+                            <label>End Date:</label>
+                            <input type="text" name="end-date" id="add-event-end-date" required>
+                        </div>
+                        <div class="pair-auto">
+                            <label>End Time:</label>
+                            <input type="text" name="end-time" id="add-event-end-time" required>
+                        </div>
+                    </div>
                     <label>Location:</label>
                     <input type="text" name="location" id="add-event-location">
                     <button type="submit">Add task</button>
