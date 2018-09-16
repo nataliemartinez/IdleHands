@@ -393,6 +393,37 @@ header {
     flex: 0 0 auto; }
 
 /* line 1, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+.close-button {
+  padding: unset;
+  border: unset;
+  font-size: unset;
+  font-weight: unset;
+  font-family: unset;
+  line-height: unset;
+  text-transform: unset;
+  transition: unset;
+  font-weight: bold;
+  font-size: 24px; }
+  /* line 51, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_mixins.scss */
+  .close-button::before {
+    content: unset;
+    position: unset;
+    left: unset;
+    top: unset;
+    height: unset;
+    width: unset;
+    background: unset;
+    transition: unset;
+    transform: unset;
+    z-index: unset; }
+  /* line 62, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_mixins.scss */
+  .close-button:hover {
+    color: unset; }
+    /* line 64, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_mixins.scss */
+    .close-button:hover::before {
+      transform: unset; }
+
+/* line 7, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
 #add-task-modal {
   position: fixed;
   top: 0;
@@ -407,46 +438,18 @@ header {
   transform: translateX(100%);
   transition: 0.6s cubic-bezier(0.85, 0.01, 0.33, 1);
   padding: 56px 48px; }
-  /* line 15, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 21, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   #add-task-modal.active {
     transform: translateX(0); }
-  /* line 18, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 24, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   #add-task-modal #close-task-modal {
-    padding: unset;
-    border: unset;
-    font-size: unset;
-    font-weight: unset;
-    font-family: unset;
-    line-height: unset;
-    text-transform: unset;
-    transition: unset;
     position: absolute;
     right: 12px;
-    top: 12px;
-    font-weight: bold;
-    font-size: 24px; }
-    /* line 51, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_mixins.scss */
-    #add-task-modal #close-task-modal::before {
-      content: unset;
-      position: unset;
-      left: unset;
-      top: unset;
-      height: unset;
-      width: unset;
-      background: unset;
-      transition: unset;
-      transform: unset;
-      z-index: unset; }
-    /* line 62, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_mixins.scss */
-    #add-task-modal #close-task-modal:hover {
-      color: unset; }
-      /* line 64, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_mixins.scss */
-      #add-task-modal #close-task-modal:hover::before {
-        transform: unset; }
-  /* line 26, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+    top: 12px; }
+  /* line 29, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   #add-task-modal form h2 {
     margin-bottom: 24px; }
-  /* line 28, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 31, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   #add-task-modal form #scheduled-checkbox {
     position: absolute;
     overflow: hidden;
@@ -456,22 +459,22 @@ header {
     margin: -1px;
     padding: 0;
     border: 0; }
-  /* line 34, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 37, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   #add-task-modal form .durationpicker-container {
     height: unset !important;
     margin-bottom: 8px; }
-  /* line 37, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 40, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   #add-task-modal form .durationpicker-innercontainer {
     display: inline-block !important;
     margin-right: 8px; }
-    /* line 40, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+    /* line 43, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
     #add-task-modal form .durationpicker-innercontainer input {
       margin-right: 8px; }
-  /* line 43, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 46, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   #add-task-modal form button[type="submit"] {
     margin-top: 24px;
     float: right; }
-  /* line 48, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 51, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   #add-task-modal form#add-event-form .hidden-fields {
     position: absolute;
     overflow: hidden;
@@ -481,11 +484,11 @@ header {
     margin: -1px;
     padding: 0;
     border: 0; }
-  /* line 54, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 57, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   #add-task-modal form#add-event-form .unique-fields {
     display: none; }
 
-/* line 61, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+/* line 64, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
 .overlay {
   position: fixed;
   display: none;
@@ -496,13 +499,13 @@ header {
   background: rgba(255, 0, 0, 0.3);
   z-index: 9; }
 
-/* line 72, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+/* line 75, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
 #ui-datepicker-div {
   margin-top: 8px;
   background: #ffe6e6;
   border: 1px solid red;
   padding: 8px 12px; }
-  /* line 77, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 80, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   #ui-datepicker-div .ui-datepicker-prev {
     font-size: 14px;
     font-weight: bolder;
@@ -510,7 +513,7 @@ header {
     line-height: 20px;
     text-transform: uppercase;
     float: left; }
-  /* line 80, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 83, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   #ui-datepicker-div .ui-datepicker-next {
     font-size: 14px;
     font-weight: bolder;
@@ -518,7 +521,7 @@ header {
     line-height: 20px;
     text-transform: uppercase;
     float: right; }
-  /* line 83, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 86, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   #ui-datepicker-div .ui-datepicker-title {
     font-size: 20px;
     font-weight: bolder;
@@ -526,10 +529,10 @@ header {
     line-height: 20px;
     padding: 0 24px;
     margin-bottom: 8px; }
-  /* line 87, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 90, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   #ui-datepicker-div .ui-datepicker-calendar {
     width: 100%; }
-    /* line 89, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+    /* line 92, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
     #ui-datepicker-div .ui-datepicker-calendar thead {
       font-size: 14px;
       font-weight: bolder;
@@ -537,7 +540,7 @@ header {
       line-height: 20px;
       text-transform: uppercase; }
 
-/* line 95, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+/* line 98, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
 .styled-checkbox {
   height: 32px;
   width: 56px;
@@ -548,10 +551,10 @@ header {
   transition: 0.3s cubic-bezier(0.85, 0.01, 0.33, 1);
   cursor: pointer;
   margin-bottom: 12px; }
-  /* line 105, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 108, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   .styled-checkbox:focus {
     outline: none; }
-  /* line 108, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 111, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   .styled-checkbox .styled-checkbox-toggle {
     position: absolute;
     left: 2px;
@@ -559,25 +562,39 @@ header {
     transform: translateY(-50%);
     height: calc( 32px * 0.9);
     transition: 0.6s cubic-bezier(0.85, 0.01, 0.33, 1); }
-    /* line 115, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+    /* line 118, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
     .styled-checkbox .styled-checkbox-toggle svg {
       transition: 0.6s cubic-bezier(0.85, 0.01, 0.33, 1);
       fill: red;
       stroke: transparent; }
-  /* line 120, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+  /* line 123, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
   .styled-checkbox.active {
     background: red;
     stroke: transparent; }
-    /* line 123, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+    /* line 126, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
     .styled-checkbox.active .styled-checkbox-toggle {
-      transform: translateY(-50%) translateX(calc(100% - 2px)) rotate(180deg); }
-    /* line 125, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+      transform: translateY(calc(-50% - 1px)) translateX(calc(100% - 2px)) rotate(180deg); }
+    /* line 128, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
     .styled-checkbox.active svg {
       fill: #ffe6e6; }
-    /* line 128, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
+    /* line 131, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_add-task.scss */
     .styled-checkbox.active:hover svg {
       fill: #ffe6e6;
       stroke: transparent; }
+
+/* line 1, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_event-modal.scss */
+.event-modal {
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffe6e6;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  padding: 36px 48px;
+  border: 1px solid red; }
 
 /* line 1, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/_main.scss */
 body {
@@ -602,36 +619,41 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: stetch; }
+  align-items: flex-start; }
 
 /* line 13, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
 .calendar-weekly-fixed {
   position: sticky;
   position: -webkit-sticky;
-  left: 0; }
-  /* line 17, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
+  left: 0;
+  background: #ffe6e6;
+  z-index: 4; }
+  /* line 19, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
   .calendar-weekly-fixed .hourly-template {
-    width: 250px;
+    width: 120px;
     background: #ffe6e6;
     border-right: 1px solid red; }
-    /* line 21, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
-    .calendar-weekly-fixed .hourly-template .hour {
-      height: 48px;
-      padding: 8px 12px; }
-      /* line 24, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
-      .calendar-weekly-fixed .hourly-template .hour:nth-of-type(2n) {
-        background: rgba(255, 0, 0, 0.1); }
 
-/* line 31, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
+/* line 26, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
+.hour {
+  height: 48px;
+  padding: 8px 12px; }
+  /* line 29, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
+  .hour:nth-of-type(2n) {
+    background: rgba(255, 0, 0, 0.1); }
+
+/* line 34, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
 .calendar-weekly-day {
   flex: 0 0 250px;
   border-left: 1px solid red;
   padding: 0;
-  position: relative; }
-  /* line 36, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
-  .calendar-weekly-day:first-of-type {
-    border-left: 0; }
+  position: relative;
+  z-index: 3; }
   /* line 40, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
+  .calendar-weekly-day:first-of-type {
+    border-left: 0;
+    margin-left: 120px; }
+  /* line 45, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
   .calendar-weekly-day .event {
     width: calc(100% - 24px);
     padding: 8px 12px;
@@ -639,13 +661,22 @@ main {
     border-bottom: 6px solid red;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%); }
-    /* line 48, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
+    transform: translateX(-50%);
+    background: #ffe6e6;
+    transition: 0.4s cubic-bezier(0.85, 0.01, 0.33, 1); }
+    /* line 55, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
     .calendar-weekly-day .event h4 {
       padding-bottom: 4px;
       border-bottom: 1px solid red; }
-      /* line 51, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
+      /* line 58, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
       .calendar-weekly-day .event h4 .pentagram {
         cursor: pointer; }
+      /* line 60, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
+      .calendar-weekly-day .event h4 .event-title {
+        cursor: pointer; }
+    /* line 63, /Users/maya/Desktop/school/MAMP/idle-hands/IdleHands/sass/calendar/_weekly.scss */
+    .calendar-weekly-day .event:hover {
+      transform: translateX(-50%) translateY(-10px);
+      border-bottom-width: 16px; }
 
 /*# sourceMappingURL=style.css.map */

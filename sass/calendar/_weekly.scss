@@ -7,24 +7,27 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: stetch;
+    align-items: flex-start;
 }
 
 .calendar-weekly-fixed {
     position: sticky;
     position: -webkit-sticky;
     left: 0;
+    background: $pink;
+    z-index: 4;
     .hourly-template {
-        width: 250px;
+        width: 120px;
         background: $pink;
         border-right: 1px solid $red;
-        .hour {
-            height: $weekly_hour_vert_dim;
-            padding: 8px 12px;
-            &:nth-of-type(2n) {
-                background: rgba($red, 0.1);
-            }
-        }
+    }
+}
+
+.hour {
+    height: $weekly_hour_vert_dim;
+    padding: 8px 12px;
+    &:nth-of-type(2n) {
+        background: rgba($red, 0.1);
     }
 }
 
@@ -33,8 +36,10 @@
     border-left: 1px solid $red;
     padding: 0;
     position: relative;
+    z-index: 3;
     &:first-of-type {
         border-left: 0;
+        margin-left: 120px;
     }
     
     .event {
@@ -45,12 +50,19 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+        background: $pink;
+        transition: 0.4s $fancybezier;
         h4 {
             padding-bottom: 4px;
             border-bottom: 1px solid $red;
             .pentagram {
                 cursor: pointer;
+            } .event-title {
+                cursor: pointer;
             }
+        } &:hover {
+            transform: translateX(-50%) translateY(-10px);
+            border-bottom-width: 16px;
         }
     }
 }

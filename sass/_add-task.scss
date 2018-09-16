@@ -1,3 +1,9 @@
+.close-button {
+    @include clear-button-style;
+    font-weight: bold;
+    font-size: 24px;
+}
+
 #add-task-modal {
     position: fixed;
     top: 0;
@@ -16,12 +22,9 @@
         transform: translateX(0);
     }
     #close-task-modal {
-        @include clear-button-style;
         position: absolute;
         right: 12px;
         top: 12px;
-        font-weight: bold;
-        font-size: 24px;
     } form {
         h2 {
             margin-bottom: 24px;
@@ -121,7 +124,7 @@
         background: $red;
         stroke: transparent;
         .styled-checkbox-toggle {
-            transform: translateY(-50%) translateX(calc(100% - 2px)) rotate(180deg);
+            transform: translateY(calc(-50% - 1px)) translateX(calc(100% - 2px)) rotate(180deg);
         } svg {
             fill: $pink;
         } &:hover {

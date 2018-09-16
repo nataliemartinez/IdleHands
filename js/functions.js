@@ -36,14 +36,17 @@ $(document).ready( function() {
     });
     
     $('.overlay').click(function() {
-        $('#close-task-modal').click();
+        $('#add-task-modal').removeClass('active');
+        $('.event-modal').fadeOut(500);
+        $('.overlay').fadeOut(500);
+        setTimeout(function() {
+            $('.overlay').remove();
+            $('.event-modal').remove();
+        }, 500);
     });
     
     $('#add-task-duration').durationPicker({
-        days: {
-            label: 'days',
-            min: 0,
-        }, hours: {
+        hours: {
             label: 'hours',
             min: 0,
             max: 24
@@ -98,10 +101,7 @@ $(document).ready( function() {
         nextText: ">"
     });
     
-    $('#add-event-end-date').datepicker({
-        prevText: "<",
-        nextText: ">"
-    });
+    
     
     // end header functions
     
