@@ -1,0 +1,22 @@
+.popup-container {
+    width: calc(100% - 48px);
+    max-width: 480px;
+    height: auto;
+    padding: 20px 40px;
+    background: $pink;
+    border: 1px solid $red;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    #close-popup {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+    }
+}

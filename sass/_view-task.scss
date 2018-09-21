@@ -22,6 +22,7 @@
     } table {
         width: 100%;
         display: block;
+        margin-bottom: 24px;
         tbody {
             display: block;
         }
@@ -35,6 +36,15 @@
                 display: block;
                 flex: 1 0 0;
                 padding: 4px 8px;
+                &.delete-event-list {
+                    font-weight: bold;
+                    flex: 0 0 auto;
+                    padding: 4px 16px;
+                    opacity: 0;
+                    pointer-events: none;
+                } &:first-of-type {
+                    padding-left: 0;
+                }
             }
         }
         tr {
@@ -49,6 +59,16 @@
                 display: block;
                 flex: 1 0 0;
                 padding: 4px 8px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                &.delete-event-list {
+                    font-weight: bold;
+                    flex: 0 0 auto;
+                    padding: 4px 16px;
+                }
+            } &:first-of-type {
+                padding-left: 0;
             }
         }
     }

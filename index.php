@@ -37,9 +37,13 @@
                 while ( $dayscount < 7 ) {
                     $dayscount++;
                     $day = $startdate + $dayscount;
+                    $date = $year . "-" . sprintf('%02d', $month) . "-" . sprintf('%02d', $day);
+                    $dateObj = new DateTime($date);
+                    $weekday = $dateObj->format('l');
             ?>
             <div class="calendar-weekly-day-header">
-                <h6><?php echo $month . "/" . $day; ?></h6>
+                <h5><?php echo $weekday; ?></h5>
+                <h6><?php echo $date; ?></h6>
             </div>
             <?php      
                 }
@@ -89,15 +93,22 @@
                         
                         $location = $event['location'];
                         $id = $event['id'];
+                        $duration = get_duration( $event['start_time'], $event['end_time'] );
+                        
+                        $eventClasses = "";
+                        
+                        if ( $event['confirmed'] == 0 ) {
+                            $eventClasses .= " to-confirm";
+                        }
+                        
             ?>
-            <div class="event" data-title="<?php echo $title; ?>" data-time="<?php echo $time; ?>" data-date="<?php echo $date; ?>" data-end-time="<?php echo $end_time; ?>" data-end-date="<?php echo $date; ?>" data-duration="90" data-starred="false" data-location="<?php echo $location; ?>" data-id="<?php echo $id; ?>">
+            <div class="event<?php echo $eventClasses; ?>" data-title="<?php echo $title; ?>" data-time="<?php echo $time; ?>" data-date="<?php echo $date; ?>" data-end-time="<?php echo $end_time; ?>" data-end-date="<?php echo $date; ?>" data-duration="<?php echo $duration; ?>" data-starred="false" data-location="<?php echo $location; ?>" data-id="<?php echo $id; ?>" data-confirmed="<?php echo $event['confirmed']; ?>">
                 <h4>
-                    <svg class="pentagram inactive" tabindex="0">
+                    <svg class="pentagram" tabindex="0">
                         <use xlink:href="<?php echo $GLOBALS['idle-hands-home']; ?>/img/symbols.svg#pentagram"></use>
                     </svg>
                     <span class="event-title" tabindex="0"><?php echo $title; ?></span>
                 </h4>
-                <p>Event description</p>
             </div>
             <?php
                     }
@@ -160,7 +171,17 @@
                 </td>
             </tr>
         </table>
-        <button type="submit">update</button>
+        <button type="submit" style="float:left">update</button>
+    </form>
+    <form id="confirm-event" method="post">
+        <input type="checkbox" id="is-confirm" name="is-confirm" class="hidden-for-screen-readers" checked>
+        <input type="text" name="id" id="confirm-id" class="hidden-for-screen-readers">
+        <button type="submit" id="delete-event"style="float:left">confirm</button>
+    </form>
+    <form id="delete-event" method="post">
+        <input type="checkbox" id="is-delete" name="is-delete" class="hidden-for-screen-readers" checked>
+        <input type="text" name="id" id="delete-id" class="hidden-for-screen-readers">
+        <button type="submit" id="delete-event"style="float:left">delete</button>
     </form>
 </div>
 <?php

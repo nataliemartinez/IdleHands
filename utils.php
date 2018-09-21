@@ -20,7 +20,7 @@
     //execute mySQL query
     function run_query($query, $result_mode=MYSQLI_STORE_RESULT) {
         $conn = connect_db();
-        //echo $query;
+        // echo $query;
         $result = mysqli_query($conn, $query, $result_mode);
         mysqli_close($conn);
         return $result;
@@ -42,10 +42,10 @@
     function add_event($name, $start, $start_time, $end, $end_time, $location) {
         $formatted_start_time = format_time($start_time);
         $formatted_end_time = format_time($end_time);
-        $query = "INSERT INTO events (name, start_date, start_time, end_date, end_time, location) VALUES ('$name', DATE '$start', '$formatted_start_time', DATE '$end', '$formatted_end_time', '$location')";
+        $query = "INSERT INTO events (name, start_date, start_time, end_date, end_time, location, confirmed) VALUES ('$name', DATE '$start', '$formatted_start_time', DATE '$end', '$formatted_end_time', '$location', 1)";
         run_query($query);
         
-        $gapsQuery = "DELETE * FROM gaps";
+        $gapsQuery = "DELETE FROM gaps";
         run_query($gapsQuery);
         
         $datesToTest = array('2018-09-16', '2018-09-17','2018-09-18','2018-09-19','2018-09-20','2018-09-21','2018-09-22');
@@ -77,13 +77,18 @@
         $query .= " WHERE id='$id'";
         run_query($query);
         
-        $gapsQuery = "DELETE * FROM gaps";
+        $gapsQuery = "DELETE FROM gaps";
         run_query($gapsQuery);
         
         $datesToTest = array('2018-09-16', '2018-09-17','2018-09-18','2018-09-19','2018-09-20','2018-09-21','2018-09-22');
         foreach( $datesToTest as $toTest ) {
             populate_gaps( $toTest );
         }
+    }
+
+    function confirm_event( $id ) {
+        $query = "UPDATE events SET confirmed = 1 WHERE id='$id'";
+        run_query($query);
     }
 
     //get task
@@ -105,7 +110,7 @@
         $query = "INSERT INTO tasks (name, duration, deadline, location, priority) VALUES ('$name', '$newduration', DATE '$deadline', '$location', '$priority')";
         run_query($query);
         
-        $gapsQuery = "DELETE * FROM gaps";
+        $gapsQuery = "DELETE FROM gaps";
         run_query($gapsQuery);
         
         $datesToTest = array('2018-09-16', '2018-09-17','2018-09-18','2018-09-19','2018-09-20','2018-09-21','2018-09-22');
@@ -136,7 +141,7 @@
         $query .= " WHERE id='$id'";
         run_query($query);
         
-        $gapsQuery = "DELETE * FROM gaps";
+        $gapsQuery = "DELETE FROM gaps";
         run_query($gapsQuery);
         
         $datesToTest = array('2018-09-16', '2018-09-17','2018-09-18','2018-09-19','2018-09-20','2018-09-21','2018-09-22');
@@ -162,7 +167,7 @@
 
     //get all tasks
     function get_all_tasks() {
-        $query = "SELECT * FROM tasks ORDER BY start_date ASC";
+        $query = "SELECT * FROM tasks ORDER BY priority DESC";
         $result = run_query($query);
         if (mysqli_num_rows($result) == 0) {
             return 0;
@@ -265,7 +270,7 @@
         $slot_start_date = $slot['start_date'];
         $slot_start_time = $slot['start_time'];
         $slot_end_date = $slot['start_date'];
-        $slot_end_time = $slot['start_time'] + $task['duration'];
+        $slot_end_time = get_new_end_time($slot['start_time'], $task['duration']);
         
         $query2 = "INSERT INTO events (name, start_date, start_time, end_date, end_time, location) VALUES ('$task_name', '$slot_start_date', '$slot_start_time', '$slot_end_date', '$slot_end_time', '$task_location') ";
 
@@ -331,4 +336,23 @@
         $sum = (($t1Hours + $t2Hours)*100) + ($t1Minutes + $t2Minutes);
         
         return $sum;
+    }
+
+    //get end time from duration and start of slot 
+    function get_new_end_time( $slot_start, $task_duration ) {
+        $minutesToAdd = $task_duration % 60;
+        $minutesInSlot = $slot_start % 100;
+        $task_duration -= $minutesToAdd;
+        $hoursToAdd = $task_duration / 60;
+        $hoursInSlot = ( $slot_start - $minutesInSlot ) / 100;
+        $minutesTogether = $minutesToAdd + $minutesInSlot;
+        
+        if ( $minutesTogether >= 60 ) {
+            $hoursToAdd += 1;
+            $minutesTogether = $minutesTogether % 60;
+        }
+        
+        $newEnd = ( ( $hoursInSlot * 100 ) + ($hoursToAdd * 100)) + $minutesTogether;
+        
+        return $newEnd;
     }

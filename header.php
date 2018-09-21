@@ -52,6 +52,12 @@
                         //echo 'UPDATED!';
                     } else if (isset( $_POST['is-fill-gaps'] ) ) {
                         suggest_tasks();
+                    } else if (isset( $_POST['is-delete'] ) ) {
+                        delete_event( $_POST['id'] );
+                        //echo $_POST['id'];
+                        //echo 'DELETED!';
+                    } else if (isset( $_POST['is-confirm'])) {
+                        confirm_event( $_POST['id'] );
                     }
                 ?>
                 <a href="<?php echo $GLOBALS['idle-hands-home']; ?>" id="idle-hands-logo">
@@ -161,11 +167,22 @@
             <?php 
                 $unassigned = array();
                 $assigned = array();
+                $unconfirmed = array();
                 foreach( $tasks as $task ) { 
                     if ( $task['start_date'] == '' ) { 
                         $unassigned[] = $task;
                     } else {
-                        $assigned[] = $task;
+                        if ( isset( $task['locked'] ) ) {
+                            if ( $task['locked'] != 1 ) {
+                                $assigned[] = $task;
+                            }
+                        } else {
+                            if ( $task['confirmed'] == 1 ) {
+                                $assigned[] = $task;
+                            } else {
+                                $unconfirmed[] = $task;
+                            }
+                        }
                     }
                 }
             
@@ -180,6 +197,9 @@
                     <td>
                         <h6>Task duration</h6>
                     </td>
+                    <td class="delete-event-list" style="color: transparent;">
+                        <button type="submit" class="unbutton">×</button>
+                    </td>
                 </thead>
             <?php 
                 foreach( $unassigned as $task ) { 
@@ -192,6 +212,9 @@
                     <td>
                         <?php echo $task['duration']; ?> minutes
                     </td>
+                    <td class="delete-event-list">
+                        <button type="submit" class="unbutton">×</button>
+                    </td>
                 </tr>
             <?php 
                 } 
@@ -201,6 +224,8 @@
                 }
             ?>
             <h4>Assigned</h4>
+            <?php if ( count( $unconfirmed ) > 0 ) { ?>
+            <h6>Unconfirmed</h6>
             <table  cellpadding="4px 8px">
                 <thead>
                     <td>
@@ -208,6 +233,43 @@
                     </td>
                     <td>
                         <h6>Task date</h6>
+                    </td>
+                    <td class="delete-event-list" style="color: transparent;">
+                        <button type="submit" class="unbutton" data-id="<?php echo $task['id']; ?>">×</button>
+                    </td>
+                </thead>
+            <?php 
+                foreach( $unconfirmed as $task ) { 
+                    //print_r($task);
+            ?>
+                <tr>
+                    <td>
+                        <?php echo $task['name']; ?>
+                    </td>
+                    <td>
+                        <?php echo $task['start_date']; ?>
+                    </td>
+                    <td class="delete-event-list">
+                        <button type="submit" class="unbutton">×</button>
+                    </td>
+                </tr>
+            <?php 
+                } 
+            ?>
+            </table>
+            <?php } ?>
+            <?php if ( count( $assigned ) > 0 ) { ?>
+            <h6>Confirmed</h6>
+            <table  cellpadding="4px 8px">
+                <thead>
+                    <td>
+                        <h6>Task name</h6>
+                    </td>
+                    <td>
+                        <h6>Task date</h6>
+                    </td>
+                    <td class="delete-event-list" style="color: transparent;">
+                        <button type="submit" class="unbutton">×</button>
                     </td>
                 </thead>
             <?php 
@@ -221,11 +283,15 @@
                     <td>
                         <?php echo $task['start_date']; ?>
                     </td>
+                    <td class="delete-event-list">
+                        <button type="submit" class="unbutton" data-id="<?php echo $task['id']; ?>">×</button>
+                    </td>
                 </tr>
             <?php 
                 } 
             ?>
             </table>
+            <?php } ?>
             <?php } else { ?>
             <h2>Sorry, there are no tasks to show.</h2>
             <?php } ?>

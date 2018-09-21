@@ -31,6 +31,7 @@
                 end_date DATE NOT NULL,
                 end_time SMALLINT(8) NOT NULL,
                 location VARCHAR(128),
+                confirmed TINYINT(1) NOT NULL DEFAULT 0,
                 PRIMARY KEY (id))";
 
             if (mysqli_query($conn, $query)) {

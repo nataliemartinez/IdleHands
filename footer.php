@@ -1,3 +1,12 @@
+    <div class="popup-container" style="display: none;">
+        <button id="close-popup" class="unbutton">
+            ×
+        </button>
+        <div class="popup-container-content">
+            
+        </div>
+    </div>
+
     <script src="dist/main.js"></script>
     <script type="text/javascript">
         (function() {

@@ -289,6 +289,14 @@ $(document).ready(function () {
         }, 500);
     });
 
+    $('.delete-event-list button').click(function () {
+        let id = $(this).attr('data-id');
+
+        let popupContent = '<form method="post" style="text-align: center;"><h3>Are you sure you want to delete this event?</h3><p>This action cannot be undone.</p><input type="checkbox" id="is-delete" name="is-delete" class="hidden-for-screen-readers" checked><input type="text" name="id" id="delete-id" value="' + id + '" class="hidden-for-screen-readers"><button type="submit">Delete</button></form>';
+
+        create_popup(popupContent);
+    });
+
     // end task viewer functions
 });
 
@@ -296,18 +304,24 @@ function position_event($event) {
     let time = $event.attr('data-time');
     let hour = (time - time % 100) / 100 - 1;
     let minute = time % 100;
+    let duration = $event.attr('data-duration');
 
     let posY = hour * hourHeight + Math.floor(minute / 60 * hourHeight);
+    let dimY = Math.floor(duration * (hourHeight / 60));
     console.log(posY);
 
     $event.css('top', posY + 'px');
+    $event.css('height', dimY + 'px');
+    $event.css('min-height', 'max-content');
 }
 
 function clear_modal() {
-    let modalFormInputs = $('.event-modal form input');
+    let modalFormInputs = $('.event-modal form#update-information input');
     modalFormInputs.each(function () {
         $(this).val("");
     });
+    $('#delete-id').val('');
+    $('#confirm-id').val('');
 }
 
 function populate_modal($event) {
@@ -333,8 +347,35 @@ function populate_modal($event) {
     $('#update-end-time').val(endTime);
     $('#update-location').val(location);
     $('#update-id').val(id);
+    if ($event.attr('data-confirmed') == 1) {
+        $('#confirm-event').hide();
+    } else {
+        $('#confirm-event').show();
+    }
+    $('#delete-id').val(id);
+    $('#confirm-id').val(id);
     $('#update-identifier').prop('checked', true);
 }
+
+function create_popup(interiorContent) {
+    $('body').append('<div class="overlay"></div>');
+    $('.overlay').fadeIn(500);
+    $('.popup-container-content').html('');
+    $('.popup-container').fadeIn(500);
+    $('.popup-container-content').append(interiorContent);
+}
+
+$('#close-popup').click(function () {
+    $('.popup-container').fadeOut(500);
+    $('.overlay').fadeOut(500);
+    setTimeout(function () {
+        $('.overlay').remove();
+    }, 500);
+});
+
+$('#close-popup').keypress(function () {
+    $('#close-popup').click();
+});
 
 /***/ })
 /******/ ]);
